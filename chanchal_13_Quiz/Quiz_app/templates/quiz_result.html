@@ -1,0 +1,17 @@
+{% extends 'master/base.html' %}
+
+
+{% block body %}
+  <div class="card mb-4 w-50 mx-auto my-5 text-center">
+    <div class="card-body">
+      <h2 class="card-title">{{ quiz.title }}</h2>
+      <p class="fs-5 mb-1"><strong> Name: </strong> {{ participant.name }}</p>
+      <p class="fs-5 mb-1"><strong> Institution: </strong> {{ participant.institution }}</p>
+      <p class="fs-5 mb-1"><strong> Class level: </strong> {{ participant.class_level }}</p>
+      <p class="fs-5 mb-1">Your Score: <strong>{{ result.score }}/{{ result.total_questions }}</strong></p>
+    </div>
+    <div class="card-footer">
+      <a class="btn btn-primary" href="{% url "quiz_list_view" %}">Quiz List</a>
+    </div>
+  </div>
+{% endblock %}

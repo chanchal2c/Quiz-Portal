@@ -1,0 +1,51 @@
+{% extends 'master/base.html' %}
+
+
+{% block body %}
+
+  <div class="card w-75 mx-auto my-5">
+    <div class="card-body">
+      <h3 class="card-title">{{ quiz.title }}</h3>
+      <p class="card-text">{{ quiz.description }}</p>
+      <a class="btn btn-primary" href="{% url 'question_add_view' quiz.id %}">Add Question</a>
+      <a class="btn btn-success" href="{% url 'quiz_list_view' %}">Quiz List</a>
+    </div>
+  </div>
+
+
+  <div class="w-75 mx-auto gap-3">
+    {% for question in quiz.questions.all %}
+      <div class="card my-3">
+        <div class="card-body">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-2">
+            <h5 class="mb-0">Q{{ forloop.counter }}. {{ question.question }}</h5>
+            <div class="">
+              <a class="btn btn-outline-secondary btn-sm" href="{% url "question_delete_view" question.id %}" >Delete</a>
+              <a class="btn btn-outline-secondary btn-sm" href="{% url "question_edit_view" question.id %}" >Edit</a>
+              <a class="btn btn-outline-secondary btn-sm" href="{% url "option_add_view" question.id  %}" >Add Option</a>
+            </div>
+          </div>
+
+          <div class="list-group">
+            {% for option in question.options.all %}
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ option.option }}</span>
+                <div class="">
+                  {% if option.is_correct %}
+                    <span class="badge bg-success">Correct</span>
+                  {% endif %}
+                  <a class="btn btn-outline-secondary btn-sm" href="{% url "option_delete_view" option.id %}" >Delete</a>
+                  <a class="btn btn-outline-secondary btn-sm" href="{% url "option_edit_view" option.id %}" >Edit</a>
+                </div>
+              </div>
+            {% empty %}
+              <div class="list-group-item text-muted">No options added yet.</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="alert alert-info">No questions yet. Add the first question for this quiz.</div>
+    {% endfor %}
+  </div>
+{% endblock %}

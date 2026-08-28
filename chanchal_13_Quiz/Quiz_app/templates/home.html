@@ -1,0 +1,39 @@
+{% extends "master/base.html" %}
+
+{% block body %}
+
+
+<div class="px-4 py-5 my-4 text-center">
+    <h1 class="display-5 fw-bold">Test Your Knowledge</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Challenge yourself with interactive quizzes, improve your knowledge, and track your progress.</p>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 w-75 mx-auto">
+    {% for quiz in quiz_list %}
+    <div class="col">
+        <div class="card h-100">
+
+            <div class="card-header">
+                <h5 class="card-title">{{quiz.title}}</h5>
+            </div>
+
+            <div class="card-body ">
+                <p class="card-text">{{quiz.description}}</p>
+                <p class="card-text">Questions: {{ quiz.question_count }}</p>
+            </div>
+
+            <div class="card-footer">
+                <a class="btn btn-warning" href="{% url 'take_quiz_view' quiz.id %}">Take Quiz</a>
+                <a class="btn btn-primary" href="{% url 'quiz_result_view' quiz.id %}">Quiz Result</a>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock body %}
+

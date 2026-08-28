@@ -1,0 +1,39 @@
+{% extends "master/base.html" %}
+
+{% block body %}
+
+<div class="w-75 mx-auto py-4">
+    <div class="py-3">
+        <a class="btn btn-success" href="{% url 'quiz_create_view' %}">Add Quiz</a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for quiz in quiz_list %}
+    <div class="col">
+        <div class="card h-100">
+
+            <div class="card-header">
+                <h5 class="card-title">{{quiz.title}}</h5>
+            </div>
+
+            <div class="card-body ">
+                <p class="card-text">{{quiz.description}}</p>
+                <p class="card-text">Questions: {{ quiz.question_count }}</p>
+            </div>
+
+            <div class="card-footer">
+                {% if request.user.is_staff %}
+                    <a class="btn btn-warning" href="{% url 'question_list_view' quiz.id %}">Questions</a>
+                    <a class="btn btn-danger" href="{% url 'quiz_delete_view' quiz.id %}">Delete</a>
+                    <a class="btn btn-primary" href="{% url 'quiz_edit_view' quiz.id %}">Edit</a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock body %}
+

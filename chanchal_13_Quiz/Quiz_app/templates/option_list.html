@@ -1,0 +1,52 @@
+
+{% extends 'master/base.html' %}
+
+{% block body %}
+
+<div class="w-75 my-4 mx-auto">
+    <h2>Options</h2>
+    <h5 class="text-muted">{{ question_data.question }}</h5>
+    <a href="{% url 'option_add_view' question_data.id %}" class="btn btn-success">+ Add Option</a>
+</div>
+
+<div class="w-75 my-4 mx-auto">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>SL No.</th>
+                <th>Option</th>
+                <th>Correct</th>
+                <th width="180">Action</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+            {% for options in option_data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ options.option }}</td>
+                <td>
+                    {% if options.is_correct %}
+                        <span class="badge bg-success">Yes</span>
+                    {% else %}
+                        <span class="badge bg-danger">No</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'option_edit_view' options.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'option_delete_view' options.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No Options Found.</td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}

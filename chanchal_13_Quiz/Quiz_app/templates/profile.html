@@ -1,0 +1,18 @@
+{% extends "master/base.html" %}
+
+{% block body %}
+
+<div class="card w-50 my-5 mx-auto">
+  <h5 class="card-header">Participant Profile</h5>
+  <div class="card-body">
+    <h5 class="card-title">Name: {{participant.name}}</h5>
+    <p class="card-text">Age: {{participant.age}}</p>
+    <p class="card-text">Gender: {{participant.gender}}</p>
+    <p class="card-text">Class: {{participant.class_level}}</p>
+    <p class="card-text">Institution: {{participant.institution}}</p>
+    <p class="card-text">Phone: {{participant.user.phone}}</p>
+    <a href="{% url "profile_update_view" %}" class="btn btn-primary">Update</a>
+  </div>
+</div>
+
+{% endblock body %}

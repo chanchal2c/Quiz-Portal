@@ -1,0 +1,35 @@
+{% extends "master/base.html" %}
+
+{% block body %}
+
+<div class="w-75 mx-auto py-4">
+    <table class="table">
+        <thead>
+            <tr>
+            <th>Sl no.</th>
+            <th>Quiz</th>
+            <th>Total questions</th>
+            <th>Score</th>
+            <th>Date</th>
+            <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz in quiz_data %}
+                <tr>
+                <th>{{forloop.counter}}</th>
+                <td>{{quiz.quiz}}</td>
+                <td>{{quiz.total_questions}}</td>
+                <td>{{quiz.score}}</td>
+                <td>{{quiz.submitted_at}}</td>
+                <td>
+                    <a class="btn btn-success" href="{% url 'take_quiz_view' quiz.id %}">Take Quiz</a>
+                </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}
+
